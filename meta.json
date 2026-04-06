@@ -1,0 +1,10 @@
+[
+  {
+    "repo": "https://raw.githubusercontent.com/aniachan/Aurum/main/repo.json",
+    "plugins": ["Aurum"]
+  },
+  {
+    "repo": "https://raw.githubusercontent.com/aniachan/Anumbra/main/repo.json",
+    "plugins": ["Anumbra"]
+  }
+]
