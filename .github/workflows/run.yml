@@ -3,6 +3,9 @@ on:
     - cron: "*/5 * * * *"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   generate:
     name: Generate repository
@@ -26,4 +29,4 @@ jobs:
           git add repo.json
           git diff --cached --quiet && exit 0
           git commit -m "Update repository"
-          git push
+          git push origin HEAD:main
