@@ -4,6 +4,18 @@ const extraTag = "Ani's Plugins";
 const reposMeta = JSON.parse(fs.readFileSync("./meta.json", "utf8"));
 const final = [];
 
+function normalizeRepoManifest(repo, url) {
+  if (Array.isArray(repo)) {
+    return repo;
+  }
+
+  if (repo && typeof repo === "object" && typeof repo.InternalName === "string") {
+    return [repo];
+  }
+
+  throw new Error(`Expected ${url} to contain a plugin object or plugin array`);
+}
+
 async function recoverPlugin(internalName) {
   if (!fs.existsSync("./repo.json")) {
     console.error("!!! Tried to recover plugin when repo isn't generated");
@@ -31,14 +43,20 @@ async function doRepo(url, plugins) {
     ? new URL(`https://api.github.com/repos/${rawGithubMatch[1]}/${rawGithubMatch[2]}/contents/${rawGithubMatch[4]}?ref=${rawGithubMatch[3]}`)
     : sourceUrl;
 
-  const repo = await fetch(fetchUrl, {
+  const res = await fetch(fetchUrl, {
     headers: {
       "accept": "application/vnd.github.raw+json",
       "cache-control": "no-cache",
       "pragma": "no-cache",
       "user-agent": "AnisPlugins/1.0.0",
     },
-  }).then((res) => res.json());
+  });
+
+  if (!res.ok) {
+    throw new Error(`HTTP ${res.status} fetching ${url}`);
+  }
+
+  const repo = normalizeRepoManifest(await res.json(), url);
 
   for (const internalName of plugins) {
     const plugin = repo.find((x) => x.InternalName === internalName);
