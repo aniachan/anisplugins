@@ -23,10 +23,21 @@ async function recoverPlugin(internalName) {
 
 async function doRepo(url, plugins) {
   console.log(`Fetching ${url}...`);
-  const repo = await fetch(url, {
-      headers: {
-              'user-agent': 'AnisPlugins/1.0.0',
-      },
+  const sourceUrl = new URL(url);
+  const rawGithubMatch = sourceUrl.hostname === "raw.githubusercontent.com"
+    ? sourceUrl.pathname.match(/^\/([^/]+)\/([^/]+)\/([^/]+)\/(.+)$/)
+    : null;
+  const fetchUrl = rawGithubMatch
+    ? new URL(`https://api.github.com/repos/${rawGithubMatch[1]}/${rawGithubMatch[2]}/contents/${rawGithubMatch[4]}?ref=${rawGithubMatch[3]}`)
+    : sourceUrl;
+
+  const repo = await fetch(fetchUrl, {
+    headers: {
+      "accept": "application/vnd.github.raw+json",
+      "cache-control": "no-cache",
+      "pragma": "no-cache",
+      "user-agent": "AnisPlugins/1.0.0",
+    },
   }).then((res) => res.json());
 
   for (const internalName of plugins) {
