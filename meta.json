@@ -6,5 +6,9 @@
   {
     "repo": "https://raw.githubusercontent.com/aniachan/Anumbra/main/repo.json",
     "plugins": ["Anumbra"]
+  },
+  {
+    "repo": "https://raw.githubusercontent.com/aniachan/xivclone/master/repo.json",
+    "plugins": ["xivclone"]
   }
 ]
