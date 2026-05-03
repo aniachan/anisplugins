@@ -6,6 +6,7 @@ Current plugins in this repository:
 
 - [Aurum](https://github.com/aniachan/Aurum) - smart crafting profit calculator with market demand analysis.
 - [Anumbra](https://github.com/aniachan/Anumbra) - Penumbra companion plugin that adds preview image support for mods.
+- [xivclone](https://github.com/aniachan/xivclone) - Borrow mods from other people!
 
 ## Repository URL
 
