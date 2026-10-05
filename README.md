@@ -7,6 +7,7 @@ Current plugins in this repository:
 - [Aurum](https://github.com/aniachan/Aurum) - smart crafting profit calculator with market demand analysis.
 - [Anumbra](https://github.com/aniachan/Anumbra) - Penumbra companion plugin that adds preview image support for mods.
 - [xivclone](https://github.com/aniachan/xivclone) - Borrow mods from other people!
+- [Customize+ (aniachan version)](https://github.com/aniachan/CustomizePlus) - Character bone customization.
 
 ## Repository URL
 
@@ -24,7 +25,7 @@ https://raw.githubusercontent.com/aniachan/anisplugins/main/repo.json
 4. Click the `+` button and ensure the new entry is enabled.
 5. Click the Save icon in the bottom-right corner.
 
-After that, Aurum and Anumbra will appear in the Available Plugins tab inside the Dalamud Plugin Installer.
+After that, Aurum, Anumbra, xivclone, and Customize+ (aniachan version) will appear in the Available Plugins tab inside the Dalamud Plugin Installer.
 
 ## Support
 

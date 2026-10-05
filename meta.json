@@ -10,5 +10,9 @@
   {
     "repo": "https://raw.githubusercontent.com/aniachan/xivclone/master/repo.json",
     "plugins": ["xivclone"]
+  },
+  {
+    "repo": "https://raw.githubusercontent.com/aniachan/CustomizePlus/main/repo.json",
+    "plugins": ["CustomizePlus"]
   }
 ]
