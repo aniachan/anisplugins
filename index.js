@@ -43,14 +43,21 @@ async function doRepo(url, plugins) {
     ? new URL(`https://api.github.com/repos/${rawGithubMatch[1]}/${rawGithubMatch[2]}/contents/${rawGithubMatch[4]}?ref=${rawGithubMatch[3]}`)
     : sourceUrl;
 
-  const res = await fetch(fetchUrl, {
-    headers: {
-      "accept": "application/vnd.github.raw+json",
-      "cache-control": "no-cache",
-      "pragma": "no-cache",
-      "user-agent": "AnisPlugins/1.0.0",
-    },
+  const headers = {
+    "accept": "application/vnd.github.raw+json",
+    "cache-control": "no-cache",
+    "pragma": "no-cache",
+    "user-agent": "AnisPlugins/1.0.0",
+  };
+  let res = await fetch(fetchUrl, {
+    headers,
   });
+
+  // Unauthenticated GitHub API requests have a low rate limit. The raw URL
+  // remains available when the API limit is reached.
+  if ((res.status === 403 || res.status === 429) && rawGithubMatch) {
+    res = await fetch(sourceUrl, { headers });
+  }
 
   if (!res.ok) {
     throw new Error(`HTTP ${res.status} fetching ${url}`);
